@@ -3,6 +3,6 @@
   "Values": {
     "AzureWebJobsStorage": "UseDevelopmentStorage=true",
     "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
-    "SqlConnectionString": "Server=tcp:sqlsrv-pwh-test-ae.database.windows.net,1433;Initial Catalog=sqldb-pwh-test-ae;Persist Security Info=False;User ID=sqlAdmin;Password=Mersal@2021;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;"
+    "SqlConnectionString": "@Microsoft.KeyVault(SecretUri=https://kv-pwh-test-ae.vault.azure.net/secrets/sql-connection-string/)"
   }
 }
