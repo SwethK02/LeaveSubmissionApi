@@ -19,6 +19,7 @@ public class LeaveSubmissionService : ILeaveSubmissionService
 
     public async Task<LeaveSubmissionResponse> ProcessAsync(LeaveSubmissionPayload payload)
     {
+        // Check for duplicate submission
         if (await _repository.SubmissionExistsAsync(payload.SubmissionId))
             throw new InvalidOperationException($"Submission '{payload.SubmissionId}' already exists.");
 
@@ -36,13 +37,19 @@ public class LeaveSubmissionService : ILeaveSubmissionService
             Status = payload.Status,
             SubmittedDate = DateTime.Parse(payload.SubmittedDate),
         };
+
+        // Decompose period into individual working days
         var workingDays = GetWorkingDays(startDate, endDate);
+
+        // Distribute leave details across working days
+        // Each working day gets one LeaveDay row per LeaveDetail entry
         var leaveDays = new List<LeaveDayEntity>();
 
         foreach (var day in workingDays)
         {
             foreach (var detail in payload.LeaveDetails)
             {
+                // Distribute quantity evenly per day per leave type
                 var quantityPerDay = detail.Quantity / workingDays.Count;
 
                 leaveDays.Add(new LeaveDayEntity

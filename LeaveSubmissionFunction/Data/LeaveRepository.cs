@@ -23,12 +23,12 @@ public class LeaveRepository : ILeaveRepository
     {
         try
         {
-            const string sql = "SELECT COUNT(1) FROM LeaveSubmission WHERE SubmissionId = @SubmissionId";
+        const string sql = "SELECT COUNT(1) FROM LeaveSubmission WHERE SubmissionId = @SubmissionId";
 
-            using var conn = new SqlConnection(_connectionString);
-            var count = await conn.ExecuteScalarAsync<int>(sql, new { SubmissionId = submissionId });
-            return count > 0;
-        }
+        using var conn = new SqlConnection(_connectionString);
+        var count = await conn.ExecuteScalarAsync<int>(sql, new { SubmissionId = submissionId });
+        return count > 0;
+    }
         catch (Exception ex) {
             throw;
         }

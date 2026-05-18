@@ -31,6 +31,8 @@ public class LeaveSubmissionFunction
         HttpRequestData req)
     {
         _logger.LogInformation("Leave submission request received.");
+
+        // ── 1. Parse body ────────────────────────────────────────────────────
         string body;
         try
         {

@@ -1,5 +1,7 @@
 namespace LeaveSubmissionFunction.Models;
 
+// ─── Inbound Request ──────────────────────────────────────────────────────────
+
 public class LeaveSubmissionRequest
 {
     public LeaveSubmissionPayload LeaveSubmission { get; set; } = null!;
